@@ -2,8 +2,9 @@
 set -e
 
 WORKDIR="$(pwd)"
+MANIFEST_FILE="$WORKDIR/.repo/manifest.xml"
 
-if [ ! -d "$WORKDIR/.repo" ]; then
+if [ ! -f "$MANIFEST_FILE" ]; then
   echo "You are about to sync all repos into:"
   echo "  $WORKDIR"
   read -p "Are you sure you want to continue? [y/N] " confirm
@@ -21,7 +22,7 @@ if [ ! -d "$WORKDIR/.repo" ]; then
   fi
 
   echo "Initializing manifest..."
-  repo init -u https://github.com/diskria/manifest.git -b main
+  repo init -u https://github.com/diskria/manifest.git -b main -m default.xml
 else
   echo "Manifest already initialized, skipping repo init."
 fi
@@ -35,7 +36,7 @@ fi
 
 if [[ -n "$dirty_repos" ]]; then
   echo "Found uncommitted changes in the following projects:"
-  echo "$dirty_repos" | sed 's/^/ - /'
+  echo "$dirty_repos" | sed "s/^/ - /"
   echo "Please commit or stash them before syncing."
   exit 1
 fi
