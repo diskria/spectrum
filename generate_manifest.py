@@ -10,7 +10,7 @@ OUTPUT_FILE = "default.xml"
 
 
 def fetch_repositories():
-    url = "https://api.github.com/user/repos?per_page=100"
+    url = f"https://api.github.com/users/{GITHUB_USERNAME}/repos?per_page=100"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
     repositories = []
     while url:
