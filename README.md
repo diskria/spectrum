@@ -3,12 +3,12 @@
 Repo manifest that glues all my projects into one AOSP-style tree.
 Because why manage repos one by one when you can sync everything at once?
 
-## Init
+## Sync
 
-Run this [one-liner](https://raw.githubusercontent.com/diskria/manifest/init.sh) to install `repo`, init the manifest and sync all repos:
+Run this [one-liner](https://raw.githubusercontent.com/diskria/manifest/sync.sh) to install `repo`, init the manifest and sync all repos:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/diskria/manifest/init.sh)
+bash <(curl -s https://raw.githubusercontent.com/diskria/manifest/sync.sh)
 ```
 
 The script will ask for confirmation before cloning into the current directory.
