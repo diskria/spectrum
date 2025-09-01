@@ -5,10 +5,10 @@ Because why manage repos one by one when you can sync everything at once?
 
 ## Sync
 
-Run this [one-liner](https://raw.githubusercontent.com/diskria/manifest/sync.sh) to install `repo`, init the manifest and sync all repos:
+Run this [one-liner](https://raw.githubusercontent.com/diskria/manifest/main/sync.sh) to install `repo`, init the manifest and sync all repos:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/diskria/manifest/sync.sh)
+bash <(curl -s https://raw.githubusercontent.com/diskria/manifest/main/sync.sh)
 ```
 
 The script will ask for confirmation before cloning into the current directory.
