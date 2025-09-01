@@ -5,6 +5,17 @@ WORKDIR="$(pwd)"
 MANIFEST_FILE="$WORKDIR/.repo/manifest.xml"
 
 if [ ! -f "$MANIFEST_FILE" ]; then
+  if [ -d "$WORKDIR/.repo" ]; then
+    echo "Warning: .repo/ exists but manifest.xml is missing."
+    read -p "Delete broken .repo and re-init? [y/N] " fix
+    if [[ "$fix" =~ ^[Yy]$ ]]; then
+      rm -rf "$WORKDIR/.repo"
+    else
+      echo "Aborted."
+      exit 1
+    fi
+  fi
+
   echo "You are about to sync all repos into:"
   echo "  $WORKDIR"
   read -p "Are you sure you want to continue? [y/N] " confirm
