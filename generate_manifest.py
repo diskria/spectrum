@@ -48,10 +48,15 @@ def add_projects_to_manifest(parent, project_list):
         full_name = repository["full_name"]
         owner_name, repository_name = full_name.split("/")
         repository_path = f"{owner_name}/{repository_name}"
+        revision = repository.get("default_branch", "main")
         XmlTree.SubElement(
             parent,
             "project",
-            {"name": full_name, "path": repository_path},
+            {
+                "name": full_name,
+                "path": repository_path,
+                "revision": revision,
+            },
         )
 
 
