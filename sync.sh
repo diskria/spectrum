@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 WORKDIR="$(pwd)"
 MANIFEST_FILE="$WORKDIR/.repo/manifest.xml"
@@ -7,7 +7,7 @@ MANIFEST_FILE="$WORKDIR/.repo/manifest.xml"
 if [ ! -f "$MANIFEST_FILE" ]; then
   if [ -d "$WORKDIR/.repo" ]; then
     echo "Warning: .repo/ exists but manifest.xml is missing."
-    read -p "Delete broken .repo and re-init? [y/N] " fix
+    read -r -p "Delete broken .repo and re-init? [y/N] " fix
     if [[ "$fix" =~ ^[Yy]$ ]]; then
       rm -rf "$WORKDIR/.repo"
     else
@@ -18,7 +18,7 @@ if [ ! -f "$MANIFEST_FILE" ]; then
 
   echo "You are about to sync all repos into:"
   echo "  $WORKDIR"
-  read -p "Are you sure you want to continue? [y/N] " confirm
+  read -r -p "Are you sure you want to continue? [y/N] " confirm
 
   if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
     echo "Aborted."
@@ -27,7 +27,7 @@ if [ ! -f "$MANIFEST_FILE" ]; then
 
   if ! command -v repo &> /dev/null; then
     echo "Installing repo tool..."
-    curl https://storage.googleapis.com/git-repo-downloads/repo > repo
+    curl -sSfL https://storage.googleapis.com/git-repo-downloads/repo > repo
     chmod a+x repo
     sudo mv repo /usr/local/bin/
   fi
@@ -39,15 +39,17 @@ else
 fi
 
 echo "Checking for uncommitted changes..."
-dirty_repos=$(repo forall -c '
+dirty_repos=$(repo forall -c "
 if ! git diff --quiet || ! git diff --cached --quiet; then
-  echo $REPO_PATH
+  echo \"\$REPO_PATH\"
 fi
-')
+")
 
 if [[ -n "$dirty_repos" ]]; then
   echo "Found uncommitted changes in the following projects:"
-  echo "$dirty_repos" | sed "s/^/ - /"
+  while IFS= read -r repo; do
+    printf ' - %s\n' "$repo"
+  done <<< "$dirty_repos"
   echo "Please commit or stash them before syncing."
   exit 1
 fi
