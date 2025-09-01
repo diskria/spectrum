@@ -12,7 +12,7 @@ jobs:
       contents: write
     env:
       GITHUB_USERNAME: ${{ github.repository_owner }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PAT: ${{ secrets.PAT }}
 
     steps:
       - name: Checkout repo

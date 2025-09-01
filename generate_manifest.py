@@ -5,13 +5,13 @@ import xml.etree.ElementTree as XmlTree
 from xml.dom import minidom
 
 GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+PAT = os.getenv("PAT")
 OUTPUT_FILE = "default.xml"
 
 
 def fetch_repositories():
-    url = f"https://api.github.com/users/{GITHUB_USERNAME}/repos?per_page=100"
-    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+    url = "https://api.github.com/user/repos?per_page=100"
+    headers = {"Authorization": f"token {PAT}"} if PAT else {}
     repositories = []
     while url:
         response = requests.get(url, headers=headers)
