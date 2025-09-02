@@ -33,7 +33,6 @@
     <project name="AchieveToDo/.github" path="AchieveToDo/.github" revision="main"/>
     <project name="AchieveToDo/mod" path="AchieveToDo/mod" revision="1.21.8+"/>
     <project name="AchieveToDo/modpack" path="AchieveToDo/modpack" revision="main"/>
-    <project name="CrafterLab/ForgeGradle" path="CrafterLab/ForgeGradle" revision="gradle-9-support"/>
     <project name="Darlingram/.github" path="Darlingram/.github" revision="main"/>
     <project name="Darlingram/android-app" path="Darlingram/android-app" revision="master"/>
     <project name="Darlingram/www" path="Darlingram/www" revision="master"/>
