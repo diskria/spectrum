@@ -1,5 +1,7 @@
 # Manifest
 
+[![Inspired by Google Repo](https://img.shields.io/badge/inspired%20by-Google%20Repo-blue)](https://gerrit.googlesource.com/git-repo)
+
 Repo manifest that glues all my projects into one AOSP-style tree.
 Because why manage repos one by one when you can sync everything at once?
 
