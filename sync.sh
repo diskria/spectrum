@@ -55,6 +55,6 @@ if [[ -n "$dirty_repos" ]]; then
 fi
 
 echo "Syncing all repositories... this may take a while"
-repo sync -j"$(nproc)"
+repo sync --force-sync --no-tags --fetch-submodules -j$(nproc)
 
 echo "All repositories synced successfully!"
