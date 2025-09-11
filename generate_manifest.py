@@ -56,6 +56,7 @@ def add_projects_to_manifest(parent, project_list):
                 "name": full_name,
                 "path": repository_path,
                 "revision": revision,
+                "clone-depth": "1",
             },
         )
 
