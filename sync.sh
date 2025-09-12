@@ -5,10 +5,14 @@ set -euo pipefail
 
 WORKDIR="$(pwd)"
 
+if [ -n "$(ls -A "$WORKDIR")" ]; then
+  echo "Please run this script in an empty directory."
+  exit 1
+fi
+
 echo "You are about to sync all repos into:"
 echo "  $WORKDIR"
 read -r -p "Are you sure you want to continue? [y/N] " confirm
-
 if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
   echo "Aborted."
   exit 1
@@ -35,7 +39,6 @@ else
       echo "$REPO_PROJECT"
     fi
   ')
-
   if [[ -n "$dirty_projects" ]]; then
     echo "Found uncommitted changes in the following projects:"
     echo "$dirty_projects"
