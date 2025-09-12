@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016 # repo forall expands variables inside single quotes
+
 set -euo pipefail
 
 WORKDIR="$(pwd)"
@@ -17,21 +19,21 @@ if ! git config --global color.ui >/dev/null; then
 fi
 
 if ! command -v repo &> /dev/null; then
-  echo "Installing repo tool…"
-  curl https://storage.googleapis.com/git-repo-downloads/repo > repo
-  chmod a+x repo
-  sudo mv repo /usr/local/bin/
+  echo "Installing repo tool..."
+  curl -s https://storage.googleapis.com/git-repo-downloads/repo > repo
+  chmod a+x "$WORKDIR/repo"
+  PATH="$WORKDIR:$PATH"
 fi
 
 if [ ! -d "$WORKDIR/.repo" ]; then
-  echo "Initializing manifest…"
+  echo "Initializing manifest..."
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
-  dirty_projects=$(repo forall -c "
+  dirty_projects=$(repo forall -c '
     if ! git diff --quiet || ! git diff --cached --quiet; then
-      echo '$REPO_PROJECT'
+      echo "$REPO_PROJECT"
     fi
-  ")
+  ')
 
   if [[ -n "$dirty_projects" ]]; then
     echo "Found uncommitted changes in the following projects:"
@@ -39,19 +41,18 @@ else
 
     read -r -p "Do you want to auto-push them? [y/N] " autopush
     if [[ "$autopush" =~ ^[Yy]$ ]]; then
-      repo forall -c "
+      repo forall -c '
         if ! git diff --quiet || ! git diff --cached --quiet; then
-          echo '[$REPO_PROJECT] pushing…'
-          git fetch origin || { echo '[$REPO_PROJECT] fetch failed'; exit 1; }
-          git add -A
-          git commit -m "chore: sync repo" || echo '[$REPO_PROJECT] nothing to commit'
+          echo "[$REPO_PROJECT] pushing..."
+          git fetch origin || { echo "[$REPO_PROJECT] fetch failed"; exit 1; }
+          git commit -m "chore: sync repo" || echo "[$REPO_PROJECT] nothing to commit"
           if ! git merge --no-edit origin/$(git rev-parse --abbrev-ref HEAD); then
-            echo '[$REPO_PROJECT] merge conflict! Please resolve manually.'
+            echo "[$REPO_PROJECT] merge conflict! Please resolve manually."
             exit 1
           fi
-          git push origin HEAD || { echo '[$REPO_PROJECT] push failed'; exit 1; }
-      fi
-      "
+          git push origin HEAD || { echo "[$REPO_PROJECT] push failed"; exit 1; }
+        fi
+      '
     else
       echo "Aborted due to uncommitted changes."
       exit 1
@@ -59,14 +60,13 @@ else
   fi
 fi
 
-echo "Syncing all repositories… this may take a while"
+echo "Syncing all repositories... this may take a while"
 repo sync -j"$(nproc)" --fail-fast --current-branch --no-tags -q --this-manifest-only
-repo forall -c "
-  git checkout -q -B '$REPO_RREV' 'origin/$REPO_RREV'
-"
-repo forall -c "
+repo forall -c 'git checkout -q -B "$REPO_RREV" "origin/$REPO_RREV"'
+repo forall -c '
   if [ -f .gitmodules ]; then
-    echo 'Updating submodules in $REPO_PROJECT…'
+    echo "Updating submodules in $REPO_PROJECT..."
     git submodule --quiet update --init --depth=1
   fi
-"
+'
+echo "All repositories synced successfully!"
