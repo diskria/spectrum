@@ -27,13 +27,6 @@ fi
 PATH="$WORKDIR:$PATH"
 
 if [ ! -d "$WORKDIR/.repo" ]; then
-  if ! command -v python3 &>/dev/null; then
-    echo "Python 3.x is required but not installed. Please install it manually."
-    exit 1
-  fi
-  python3 -m venv "$WORKDIR/.env"
-  echo "Python virtual environment created in $WORKDIR/.env"
-
   echo "Initializing manifest..."
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
@@ -78,3 +71,19 @@ repo forall -c '
   fi
 '
 echo "All repositories synced successfully!"
+
+if [ ! -d "$WORKDIR/.env" ]; then
+  read -r -p "Do you want to create a Python virtual environment in $WORKDIR/.env? [y/N] " setup_env
+  if [[ "$setup_env" =~ ^[Yy]$ ]]; then
+    if ! command -v python3 &> /dev/null; then
+      echo "Python 3.x is required but not installed. Please install it manually."
+      exit 1
+    fi
+    echo "Creating Python virtual environment..."
+    python3 -m venv "$WORKDIR/.env" || {
+      echo "Failed to create virtual environment. Exiting."
+      exit 1
+    }
+    echo "Virtual environment created at $WORKDIR/.env"
+  fi
+fi
