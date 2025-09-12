@@ -6,6 +6,7 @@ from xml.dom import minidom
 
 GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
 PAT = os.getenv("PAT")
+
 OUTPUT_FILE = "default.xml"
 
 
@@ -56,7 +57,6 @@ def add_projects_to_manifest(parent, project_list):
                 "name": full_name,
                 "path": repository_path,
                 "revision": revision,
-                "clone-depth": "1",
             },
         )
 
@@ -64,10 +64,10 @@ def add_projects_to_manifest(parent, project_list):
 def build_manifest(user_name, grouped_repositories):
     manifest = XmlTree.Element("manifest")
     XmlTree.SubElement(
-        manifest, "remote", {"name": "github", "fetch": "https://github.com/"}
+        manifest, "remote", {"name": "origin", "fetch": "https://github.com/"}
     )
     XmlTree.SubElement(
-        manifest, "default", {"remote": "github", "revision": "main"}
+        manifest, "default", {"remote": "origin", "revision": "main", "clone-depth": "1"}
     )
 
     personal_repositories = sorted(
