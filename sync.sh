@@ -7,31 +7,31 @@ if [ ! -d "$WORKDIR/.repo" ]; then
   echo "Initializing manifest..."
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
-  dirty_repos=$(repo forall -c '
+  dirty_repos=$(repo forall -c "
     if ! git diff --quiet || ! git diff --cached --quiet; then
-      echo "$REPO_PATH"
+      echo '$REPO_PATH'
     fi
-  ')
+  ")
 
   if [[ -n "$dirty_repos" ]]; then
     echo "Found uncommitted changes in the following projects:"
     echo "$dirty_repos"
 
-    read -p "Do you want to auto-push them? [y/N] " autopush
+    read -r -p "Do you want to auto-push them? [y/N] " autopush
     if [[ "$autopush" =~ ^[Yy]$ ]]; then
-      repo forall -c '
+      repo forall -c "
         if ! git diff --quiet || ! git diff --cached --quiet; then
-          echo "[$REPO_PROJECT] committing & pushing..."
-          git fetch origin || { echo "[$REPO_PROJECT] fetch failed"; exit 1; }
+          echo '[$REPO_PROJECT] committing & pushing...'
+          git fetch origin || { echo '[$REPO_PROJECT] fetch failed'; exit 1; }
           git add -A
-          git commit -m "chore: sync repo" || echo "[$REPO_PROJECT] nothing to commit"
+          git commit -m "chore: sync repo" || echo '[$REPO_PROJECT] nothing to commit'
           if ! git merge --no-edit origin/$(git rev-parse --abbrev-ref HEAD); then
-            echo "[$REPO_PROJECT] merge conflict! Please resolve manually."
+            echo '[$REPO_PROJECT] merge conflict! Please resolve manually.'
             exit 1
           fi
-          git push origin HEAD || { echo "[$REPO_PROJECT] push failed"; exit 1; }
+          git push origin HEAD || { echo '[$REPO_PROJECT] push failed'; exit 1; }
       fi
-      '
+      "
     else
       echo "Aborted due to uncommitted changes."
       exit 1
@@ -41,10 +41,12 @@ fi
 
 echo "Syncing all repositories... this may take a while"
 repo sync -j"$(nproc)" --fail-fast --current-branch --no-tags -q --this-manifest-only
-repo forall -c '
+repo forall -c "
+  git remote remove m 2>/dev/null || true
+  git checkout -B '$REPO_RREV' 'origin/$REPO_RREV'
+"
+repo forall -c "
   if [ -f .gitmodules ]; then
     git submodule update --init --depth=1
   fi
-  git remote remove m 2>/dev/null || true
-  git checkout -B "$REPO_RREV" "origin/$REPO_RREV"
-'
+"
