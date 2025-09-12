@@ -45,4 +45,6 @@ repo forall -c '
   if [ -f .gitmodules ]; then
     git submodule update --init --depth=1
   fi
+  git remote remove m 2>/dev/null || true
+  git checkout -B "$REPO_RREV" "origin/$REPO_RREV"
 '
