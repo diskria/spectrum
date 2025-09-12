@@ -12,8 +12,16 @@ if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
+if ! command -v repo &> /dev/null; then
+  echo "Installing repo tool…"
+  curl https://storage.googleapis.com/git-repo-downloads/repo > repo
+  chmod a+x repo
+  sudo mv repo /usr/local/bin/
+  repo config color.ui false
+fi
+
 if [ ! -d "$WORKDIR/.repo" ]; then
-  echo "Initializing manifest..."
+  echo "Initializing manifest…"
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
   dirty_projects=$(repo forall -c "
@@ -30,7 +38,7 @@ else
     if [[ "$autopush" =~ ^[Yy]$ ]]; then
       repo forall -c "
         if ! git diff --quiet || ! git diff --cached --quiet; then
-          echo '[$REPO_PROJECT] committing & pushing...'
+          echo '[$REPO_PROJECT] pushing…'
           git fetch origin || { echo '[$REPO_PROJECT] fetch failed'; exit 1; }
           git add -A
           git commit -m "chore: sync repo" || echo '[$REPO_PROJECT] nothing to commit'
@@ -48,7 +56,7 @@ else
   fi
 fi
 
-echo "Syncing all repositories... this may take a while"
+echo "Syncing all repositories… this may take a while"
 repo sync -j"$(nproc)" --fail-fast --current-branch --no-tags -q --this-manifest-only
 repo forall -c "
   git checkout -q -B '$REPO_RREV' 'origin/$REPO_RREV'
