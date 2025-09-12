@@ -5,6 +5,7 @@ WORKDIR="$(pwd)"
 
 if [ ! -d "$WORKDIR/.repo" ]; then
   echo "Initializing manifest..."
+  repo config color.ui false
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
   dirty_repos=$(repo forall -c "
