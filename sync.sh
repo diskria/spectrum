@@ -3,9 +3,17 @@ set -euo pipefail
 
 WORKDIR="$(pwd)"
 
+echo "You are about to sync all repos into:"
+echo "  $WORKDIR"
+read -r -p "Are you sure you want to continue? [y/N] " confirm
+
+if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+  echo "Aborted."
+  exit 1
+fi
+
 if [ ! -d "$WORKDIR/.repo" ]; then
   echo "Initializing manifest..."
-  repo config color.ui false
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
   dirty_projects=$(repo forall -c "
