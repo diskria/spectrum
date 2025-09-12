@@ -1,4 +1,4 @@
-# Spectrum
+# 🌈 Spectrum
 
 [![Inspired by Google Repo](https://img.shields.io/badge/inspired%20by-Google%20Repo-blue)](https://gerrit.googlesource.com/git-repo)
 
