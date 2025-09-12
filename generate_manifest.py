@@ -75,7 +75,7 @@ def group_repos(user_name, repos):
 
 
 def add_projects_to_manifest(parent, owner_name, projects):
-    parent.append(XmlTree.Comment(f" region start {owner_name} "))
+    parent.append(XmlTree.Comment(f" region {owner_name} "))
     for repo in projects:
         full_name = repo["full_name"]
         revision = repo.get("default_branch", DEFAULT_BRANCH)

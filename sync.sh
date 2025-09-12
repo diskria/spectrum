@@ -22,10 +22,18 @@ if ! command -v repo &> /dev/null; then
   echo "Installing repo tool..."
   curl -s https://storage.googleapis.com/git-repo-downloads/repo > repo
   chmod a+x "$WORKDIR/repo"
-  PATH="$WORKDIR:$PATH"
 fi
 
+PATH="$WORKDIR:$PATH"
+
 if [ ! -d "$WORKDIR/.repo" ]; then
+  if ! command -v python3 &>/dev/null; then
+    echo "Python 3.x is required but not installed. Please install it manually."
+    exit 1
+  fi
+  python3 -m venv "$WORKDIR/.env"
+  echo "Python virtual environment created in $WORKDIR/.env"
+
   echo "Initializing manifest..."
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
