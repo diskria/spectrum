@@ -1,8 +1,8 @@
 import os
-import requests
-import subprocess
 import xml.etree.ElementTree as XmlTree
 from xml.dom import minidom
+
+import requests
 
 GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
 PAT = os.getenv("PAT")
@@ -122,19 +122,6 @@ def save_manifest(user_name, repositories, file_name):
         file.write(prettify(manifest))
 
 
-def git_commit_and_push(file_name):
-    subprocess.run(["git", "add", file_name], check=True)
-    result = subprocess.run(["git", "diff", "--cached", "--quiet"])
-    if result.returncode == 0:
-        print("No changes in manifest, skipping commit.")
-        return
-    subprocess.run(
-        ["git", "commit", "-m", "chore: update default.xml"], check=True
-    )
-    subprocess.run(["git", "push"], check=True)
-
-
 if __name__ == "__main__":
     all_repositories = fetch_repositories()
     save_manifest(GITHUB_USERNAME, all_repositories, OUTPUT_FILE)
-    git_commit_and_push(OUTPUT_FILE)
