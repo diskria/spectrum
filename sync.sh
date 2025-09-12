@@ -8,15 +8,15 @@ if [ ! -d "$WORKDIR/.repo" ]; then
   repo config color.ui false
   repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
-  dirty_repos=$(repo forall -c "
+  dirty_projects=$(repo forall -c "
     if ! git diff --quiet || ! git diff --cached --quiet; then
-      echo '$REPO_PATH'
+      echo '$REPO_PROJECT'
     fi
   ")
 
-  if [[ -n "$dirty_repos" ]]; then
+  if [[ -n "$dirty_projects" ]]; then
     echo "Found uncommitted changes in the following projects:"
-    echo "$dirty_repos"
+    echo "$dirty_projects"
 
     read -r -p "Do you want to auto-push them? [y/N] " autopush
     if [[ "$autopush" =~ ^[Yy]$ ]]; then
@@ -44,10 +44,11 @@ echo "Syncing all repositories... this may take a while"
 repo sync -j"$(nproc)" --fail-fast --current-branch --no-tags -q --this-manifest-only
 repo forall -c "
   git remote remove m 2>/dev/null || true
-  git checkout -B '$REPO_RREV' 'origin/$REPO_RREV'
+  git checkout -q -B '$REPO_RREV' 'origin/$REPO_RREV'
 "
 repo forall -c "
   if [ -f .gitmodules ]; then
-    git submodule update --init --depth=1
+    echo 'Updating submodules in $REPO_PROJECT…'
+    git submodule --quiet update --init --depth=1
   fi
 "
