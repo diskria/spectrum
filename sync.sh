@@ -61,7 +61,7 @@ else
   fi
 fi
 
-echo "Syncing all repositories... this may take a while"
+echo "Syncing all repositories..."
 repo sync -j"$(nproc)" --fail-fast --current-branch --no-tags -q --this-manifest-only
 repo forall -c 'git checkout -q -B "$REPO_RREV" "origin/$REPO_RREV"'
 repo forall -c '
@@ -86,4 +86,10 @@ if [ ! -d "$WORKDIR/.env" ]; then
     }
     echo "Virtual environment created at $WORKDIR/.env"
   fi
+fi
+
+if [ -f "$WORKDIR/.repo/manifests/sync.sh" ] && [ ! -f "$WORKDIR/sync.sh" ]; then
+  cp "$WORKDIR/.repo/manifests/sync.sh" "$WORKDIR/sync.sh"
+  chmod +x "$WORKDIR/sync.sh"
+  echo "You can now use ./sync.sh to sync repositories in the future."
 fi
