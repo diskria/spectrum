@@ -12,12 +12,15 @@ if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
+if ! git config --global color.ui >/dev/null; then
+  git config --global color.ui false
+fi
+
 if ! command -v repo &> /dev/null; then
   echo "Installing repo tool…"
   curl https://storage.googleapis.com/git-repo-downloads/repo > repo
   chmod a+x repo
   sudo mv repo /usr/local/bin/
-  repo config color.ui false
 fi
 
 if [ ! -d "$WORKDIR/.repo" ]; then
