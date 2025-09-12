@@ -28,9 +28,20 @@ class RepoGroups:
     domains: list = field(default_factory=list)
     brands: list = field(default_factory=list)
 
-    def sort_all(self):
-        for group in (self.profile, self.domains, self.brands):
-            group.sort(key=repo_sort_key)
+    def sort_all(self, user_name: str):
+        self.profile.sort(
+            key=lambda r: (
+                r["full_name"].split("/")[1].lower() != user_name.lower(),
+                r["full_name"].lower(),
+            )
+        )
+        for group in (self.domains, self.brands):
+            group.sort(
+                key=lambda r: (
+                    r["full_name"].split("/")[1].lower() != ".github",
+                    r["full_name"].lower(),
+                )
+            )
 
 
 def fetch_repos():
@@ -58,7 +69,7 @@ def group_repos(user_name, repos):
         else:
             repo_groups.brands.append(repo)
 
-    repo_groups.sort_all()
+    repo_groups.sort_all(user_name)
 
     return repo_groups
 
@@ -88,11 +99,8 @@ def build_manifest(user_name, repo_groups: RepoGroups):
         {"remote": "origin", "revision": DEFAULT_BRANCH, "clone-depth": "1"},
     )
 
-    profile_repos = sorted(
-        repo_groups.profile, key=repo_sort_key
-    )
-    if profile_repos:
-        add_projects_to_manifest(root, user_name, profile_repos)
+    if repo_groups.profile:
+        add_projects_to_manifest(root, user_name, repo_groups.profile)
 
     domain_map = {}
     for repo in repo_groups.domains:
@@ -100,8 +108,7 @@ def build_manifest(user_name, repo_groups: RepoGroups):
         domain_map.setdefault(owner, []).append(repo)
 
     for domain_name in sorted(domain_map.keys(), key=str.lower):
-        repos = sorted(domain_map[domain_name], key=repo_sort_key)
-        add_projects_to_manifest(root, domain_name, repos)
+        add_projects_to_manifest(root, domain_name, domain_map[domain_name])
 
     brand_map = {}
     for repo in repo_groups.brands:
@@ -109,8 +116,7 @@ def build_manifest(user_name, repo_groups: RepoGroups):
         brand_map.setdefault(owner, []).append(repo)
 
     for brand_name in sorted(brand_map.keys(), key=str.lower):
-        repos = sorted(brand_map[brand_name], key=repo_sort_key)
-        add_projects_to_manifest(root, brand_name, repos)
+        add_projects_to_manifest(root, brand_name, brand_map[brand_name])
 
     return root
 
