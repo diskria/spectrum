@@ -8,6 +8,7 @@ import requests
 GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
 PAT = os.getenv("PAT")
 
+DEFAULT_BRANCH = "main"
 OUTPUT_FILE = "default.xml"
 
 
@@ -66,15 +67,13 @@ def add_projects_to_manifest(parent, owner_name, projects):
     parent.append(XmlTree.Comment(f" region start {owner_name} "))
     for repo in projects:
         full_name = repo["full_name"]
-        revision = repo.get("default_branch", "main")
-        XmlTree.SubElement(
-            parent,
-            "project",
-            {
-                "name": full_name,
-                "revision": revision,
-            },
-        )
+        revision = repo.get("default_branch", DEFAULT_BRANCH)
+
+        attrs = {"name": full_name}
+        if revision != DEFAULT_BRANCH:
+            attrs["revision"] = revision
+
+        XmlTree.SubElement(parent, "project", attrs)
     parent.append(XmlTree.Comment(f" endregion {owner_name} "))
 
 
@@ -86,7 +85,7 @@ def build_manifest(user_name, repo_groups: RepoGroups):
     )
     XmlTree.SubElement(
         root, "default",
-        {"remote": "origin", "revision": "main", "clone-depth": "1"},
+        {"remote": "origin", "revision": DEFAULT_BRANCH, "clone-depth": "1"},
     )
 
     profile_repos = sorted(
