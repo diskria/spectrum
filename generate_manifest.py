@@ -1,5 +1,6 @@
 import os
 import xml.etree.ElementTree as XmlTree
+from dataclasses import dataclass, field
 from xml.dom import minidom
 
 import requests
@@ -10,103 +11,8 @@ PAT = os.getenv("PAT")
 OUTPUT_FILE = "default.xml"
 
 
-def fetch_repositories():
-    url = "https://api.github.com/user/repos?per_page=100"
-    headers = {"Authorization": f"token {PAT}"} if PAT else {}
-    repositories = []
-    while url:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        repositories.extend(response.json())
-        url = response.links.get("next", {}).get("url")
-    return repositories
-
-
-def sort_and_group_repositories(user_name, repositories):
-    grouped_repositories = {"personal": [], "user_dash": [], "organizations": []}
-
-    for repository in repositories:
-        full_name = repository["full_name"]
-        owner_name, _ = full_name.split("/")
-
-        if owner_name.lower() == user_name.lower():
-            grouped_repositories["personal"].append(repository)
-        elif owner_name.lower().startswith(user_name.lower() + "-"):
-            grouped_repositories["user_dash"].append(repository)
-        else:
-            grouped_repositories["organizations"].append(repository)
-
-    for key in grouped_repositories:
-        grouped_repositories[key] = sorted(
-            grouped_repositories[key], key=lambda repo: repo["full_name"].lower()
-        )
-
-    return grouped_repositories
-
-
-def add_projects_to_manifest(parent, project_list):
-    for repository in project_list:
-        full_name = repository["full_name"]
-        revision = repository.get("default_branch", "main")
-        XmlTree.SubElement(
-            parent,
-            "project",
-            {
-                "name": full_name,
-                "revision": revision,
-            },
-        )
-
-
-def build_manifest(user_name, grouped_repositories):
-    manifest = XmlTree.Element("manifest")
-    XmlTree.SubElement(
-        manifest, "remote", {"name": "origin", "fetch": "https://github.com/"}
-    )
-    XmlTree.SubElement(
-        manifest, "default", {"remote": "origin", "revision": "main", "clone-depth": "1"}
-    )
-
-    personal_repositories = sorted(
-        grouped_repositories["personal"],
-        key=lambda repo: (
-            repo["full_name"].split("/")[1].lower() != user_name.lower(),
-            repo["full_name"].lower(),
-        ),
-    )
-    add_projects_to_manifest(manifest, personal_repositories)
-
-    user_dash_by_owner = {}
-    for repository in grouped_repositories["user_dash"]:
-        owner_name, _ = repository["full_name"].split("/")
-        user_dash_by_owner.setdefault(owner_name, []).append(repository)
-
-    for owner_name in sorted(user_dash_by_owner.keys(), key=str.lower):
-        owner_repositories = sorted(
-            user_dash_by_owner[owner_name],
-            key=lambda repo: (
-                repo["full_name"].split("/")[1].lower() != ".github",
-                repo["full_name"].lower(),
-            ),
-        )
-        add_projects_to_manifest(manifest, owner_repositories)
-
-    organizations_by_owner = {}
-    for repository in grouped_repositories["organizations"]:
-        owner_name, _ = repository["full_name"].split("/")
-        organizations_by_owner.setdefault(owner_name, []).append(repository)
-
-    for owner_name in sorted(organizations_by_owner.keys(), key=str.lower):
-        organization_repositories = sorted(
-            organizations_by_owner[owner_name],
-            key=lambda repo: (
-                repo["full_name"].split("/")[1].lower() != ".github",
-                repo["full_name"].lower(),
-            ),
-        )
-        add_projects_to_manifest(manifest, organization_repositories)
-
-    return manifest
+def repo_sort_key(repo):
+    return repo["full_name"].lower()
 
 
 def prettify(element):
@@ -115,13 +21,108 @@ def prettify(element):
     return parsed.toprettyxml(indent="    ")
 
 
-def save_manifest(user_name, repositories, file_name):
-    grouped_repositories = sort_and_group_repositories(user_name, repositories)
-    manifest = build_manifest(user_name, grouped_repositories)
+@dataclass
+class RepoGroups:
+    profile: list = field(default_factory=list)
+    domains: list = field(default_factory=list)
+    brands: list = field(default_factory=list)
+
+    def sort_all(self):
+        for group in (self.profile, self.domains, self.brands):
+            group.sort(key=repo_sort_key)
+
+
+def fetch_repos():
+    url = "https://api.github.com/user/repos?per_page=100"
+    headers = {"Authorization": f"token {PAT}"} if PAT else {}
+    repos = []
+    while url:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        repos.extend(response.json())
+        url = response.links.get("next", {}).get("url")
+    return repos
+
+
+def group_repos(user_name, repos):
+    repo_groups = RepoGroups()
+
+    for repo in repos:
+        owner, _ = repo["full_name"].split("/")
+
+        if owner == user_name:
+            repo_groups.profile.append(repo)
+        elif owner.startswith(user_name + "-"):
+            repo_groups.domains.append(repo)
+        else:
+            repo_groups.brands.append(repo)
+
+    repo_groups.sort_all()
+
+    return repo_groups
+
+
+def add_projects_to_manifest(parent, owner_name, projects):
+    parent.append(XmlTree.Comment(f" region start {owner_name} "))
+    for repo in projects:
+        full_name = repo["full_name"]
+        revision = repo.get("default_branch", "main")
+        XmlTree.SubElement(
+            parent,
+            "project",
+            {
+                "name": full_name,
+                "revision": revision,
+            },
+        )
+    parent.append(XmlTree.Comment(f" endregion {owner_name} "))
+
+
+def build_manifest(user_name, repo_groups: RepoGroups):
+    root = XmlTree.Element("manifest")
+    XmlTree.SubElement(
+        root, "remote",
+        {"name": "origin", "fetch": "https://github.com/"}
+    )
+    XmlTree.SubElement(
+        root, "default",
+        {"remote": "origin", "revision": "main", "clone-depth": "1"},
+    )
+
+    profile_repos = sorted(
+        repo_groups.profile, key=repo_sort_key
+    )
+    if profile_repos:
+        add_projects_to_manifest(root, user_name, profile_repos)
+
+    domain_map = {}
+    for repo in repo_groups.domains:
+        owner, _ = repo["full_name"].split("/")
+        domain_map.setdefault(owner, []).append(repo)
+
+    for domain_name in sorted(domain_map.keys(), key=str.lower):
+        repos = sorted(domain_map[domain_name], key=repo_sort_key)
+        add_projects_to_manifest(root, domain_name, repos)
+
+    brand_map = {}
+    for repo in repo_groups.brands:
+        owner, _ = repo["full_name"].split("/")
+        brand_map.setdefault(owner, []).append(repo)
+
+    for brand_name in sorted(brand_map.keys(), key=str.lower):
+        repos = sorted(brand_map[brand_name], key=repo_sort_key)
+        add_projects_to_manifest(root, brand_name, repos)
+
+    return root
+
+
+def save_manifest(user_name, repos, file_name):
+    grouped_repos = group_repos(user_name, repos)
+    manifest = build_manifest(user_name, grouped_repos)
     with open(file_name, "w", encoding="utf-8") as file:
         file.write(prettify(manifest))
 
 
 if __name__ == "__main__":
-    all_repositories = fetch_repositories()
-    save_manifest(GITHUB_USERNAME, all_repositories, OUTPUT_FILE)
+    all_repos = fetch_repos()
+    save_manifest(GITHUB_USERNAME, all_repos, OUTPUT_FILE)
