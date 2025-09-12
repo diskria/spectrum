@@ -43,7 +43,6 @@ fi
 echo "Syncing all repositories... this may take a while"
 repo sync -j"$(nproc)" --fail-fast --current-branch --no-tags -q --this-manifest-only
 repo forall -c "
-  git remote remove m 2>/dev/null || true
   git checkout -q -B '$REPO_RREV' 'origin/$REPO_RREV'
 "
 repo forall -c "
