@@ -2,27 +2,30 @@
 <manifest>
     <remote name="origin" fetch="https://github.com/"/>
     <default remote="origin" revision="main" clone-depth="1"/>
-    <!-- region start diskria -->
+    <!-- region diskria -->
     <project name="diskria/diskria"/>
     <project name="diskria/bisectrix"/>
     <project name="diskria/projektor"/>
     <project name="diskria/spectrum"/>
     <!-- endregion diskria -->
-    <!-- region start diskria-android -->
+    <!-- region diskria-android -->
     <project name="diskria-android/.github"/>
     <project name="diskria-android/7TVEmotesToDiscord" revision="master"/>
     <project name="diskria-android/NoANRAndCrashDialogs"/>
     <project name="diskria-android/QSTermuxTiles" revision="master"/>
     <!-- endregion diskria-android -->
-    <!-- region start diskria-legacy -->
+    <!-- region diskria-legacy -->
     <project name="diskria-legacy/.github"/>
     <project name="diskria-legacy/AIDE-Colors"/>
     <project name="diskria-legacy/Icon-Recolor-Tool"/>
     <project name="diskria-legacy/MT3A-NCK-Hacker"/>
+    <project name="diskria-legacy/Skyscrapers"/>
     <project name="diskria-legacy/VK-Films"/>
+    <project name="diskria-legacy/VK-MusicTransfer"/>
+    <project name="diskria-legacy/VK-PhotoParser"/>
     <project name="diskria-legacy/VK-Protect"/>
     <!-- endregion diskria-legacy -->
-    <!-- region start diskria-libs -->
+    <!-- region diskria-libs -->
     <project name="diskria-libs/.github"/>
     <project name="diskria-libs/gradle-utils"/>
     <project name="diskria-libs/kotlin-regex-dsl"/>
@@ -30,7 +33,7 @@
     <project name="diskria-libs/kotlin-utils"/>
     <project name="diskria-libs/minecraft-utils"/>
     <!-- endregion diskria-libs -->
-    <!-- region start diskria-mc -->
+    <!-- region diskria-mc -->
     <project name="diskria-mc/.github"/>
     <project name="diskria-mc/AchieveHunter" revision="master"/>
     <project name="diskria-mc/AdvancementsFullscreen" revision="1.21.8+"/>
@@ -47,17 +50,17 @@
     <project name="diskria-mc/XYZBook" revision="1.20.2+"/>
     <project name="diskria-mc/YetAnotherGlint"/>
     <!-- endregion diskria-mc -->
-    <!-- region start AchieveToDo -->
+    <!-- region AchieveToDo -->
     <project name="AchieveToDo/.github"/>
     <project name="AchieveToDo/mod" revision="1.21.8+"/>
     <project name="AchieveToDo/modpack"/>
     <!-- endregion AchieveToDo -->
-    <!-- region start Darlingram -->
+    <!-- region Darlingram -->
     <project name="Darlingram/.github"/>
     <project name="Darlingram/android-app" revision="master"/>
     <project name="Darlingram/www" revision="master"/>
     <!-- endregion Darlingram -->
-    <!-- region start ForkyLab -->
+    <!-- region ForkyLab -->
     <project name="ForkyLab/.github"/>
     <project name="ForkyLab/gradle-plugin"/>
     <project name="ForkyLab/xml-schema"/>
