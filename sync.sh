@@ -91,8 +91,9 @@ if [ ! -d "$WORKDIR/.env" ]; then
   fi
 fi
 
-if [ -f "$WORKDIR/.repo/manifests/sync.sh" ] && [ ! -f "$WORKDIR/sync.sh" ]; then
-  cp "$WORKDIR/.repo/manifests/sync.sh" "$WORKDIR/sync.sh"
-  chmod +x "$WORKDIR/sync.sh"
-  echo "You can now use ./sync.sh to sync repositories in the future."
+if [ -f "$WORKDIR/.repo/manifests/spectrum.sh" ] && [ ! -f "$WORKDIR/spectrum.sh" ]; then
+  cp "$WORKDIR/.repo/manifests/spectrum.sh" "$WORKDIR/spectrum.sh"
+  chmod +x "$WORKDIR/spectrum.sh"
+  echo "The spectrum tool has been installed as ./spectrum.sh"
+  echo "Run './spectrum.sh help' to see available commands."
 fi
