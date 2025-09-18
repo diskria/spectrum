@@ -20,7 +20,6 @@ After syncing, you’ll have a consistent project tree, for example:
 ```bash
 workspace/
 ├─ diskria/
-│  ├─ bisectrix/
 │  ├─ diskria/
 │  ├─ projektor/
 │  └─ spectrum/
