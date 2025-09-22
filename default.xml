@@ -4,7 +4,6 @@
     <default remote="origin" revision="main" clone-depth="1"/>
     <!-- region diskria -->
     <project name="diskria/diskria"/>
-    <project name="diskria/bisectrix"/>
     <project name="diskria/projektor"/>
     <project name="diskria/spectrum"/>
     <!-- endregion diskria -->
@@ -27,7 +26,6 @@
     <!-- endregion diskria-legacy -->
     <!-- region diskria-libs -->
     <project name="diskria-libs/.github"/>
-    <project name="diskria-libs/gradle-utils"/>
     <project name="diskria-libs/kotlin-regex-dsl"/>
     <project name="diskria-libs/kotlin-shell-dsl"/>
     <project name="diskria-libs/kotlin-utils"/>
