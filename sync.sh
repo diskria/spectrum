@@ -32,7 +32,7 @@ PATH="$WORKDIR:$PATH"
 
 if [ ! -d "$WORKDIR/.repo" ]; then
   echo "Initializing manifest..."
-  repo init -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
+  repo init --no-repo-verify -q -u https://github.com/diskria/spectrum.git --manifest-depth=1
 else
   dirty_projects=$(repo forall -c '
     if ! git diff --quiet || ! git diff --cached --quiet; then
