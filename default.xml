@@ -30,7 +30,6 @@
     <project name="diskria-libs/kotlin-regex-dsl"/>
     <project name="diskria-libs/kotlin-shell-dsl"/>
     <project name="diskria-libs/kotlin-utils"/>
-    <project name="diskria-libs/minecraft-utils"/>
     <!-- endregion diskria-libs -->
     <!-- region diskria-mc -->
     <project name="diskria-mc/.github"/>
@@ -64,4 +63,13 @@
     <project name="ForkyLab/gradle-plugin"/>
     <project name="ForkyLab/xml-schema"/>
     <!-- endregion ForkyLab -->
+    <!-- region Recrafter -->
+    <project name="Recrafter/beacon"/>
+    <project name="Recrafter/bedrock"/>
+    <project name="Recrafter/cobbble"/>
+    <project name="Recrafter/composter"/>
+    <project name="Recrafter/crafter"/>
+    <project name="Recrafter/enderpearl"/>
+    <project name="Recrafter/recipe"/>
+    <!-- endregion Recrafter -->
 </manifest>
