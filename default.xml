@@ -34,7 +34,7 @@
     <!-- region diskria-mc -->
     <project name="diskria-mc/.github"/>
     <project name="diskria-mc/AchieveHunter" revision="master"/>
-    <project name="diskria-mc/AdvancementsFullscreen" revision="1.21.8+"/>
+    <project name="diskria-mc/advancements-fullscreen"/>
     <project name="diskria-mc/AdvancementsSearch" revision="1.21.8+"/>
     <project name="diskria-mc/BACAP-Better-RU"/>
     <project name="diskria-mc/Carnevalle"/>
@@ -69,6 +69,7 @@
     <project name="Recrafter/cobbble"/>
     <project name="Recrafter/composter"/>
     <project name="Recrafter/crafter"/>
+    <project name="Recrafter/crafter-annotations"/>
     <project name="Recrafter/enderpearl"/>
     <project name="Recrafter/recipe"/>
     <!-- endregion Recrafter -->
