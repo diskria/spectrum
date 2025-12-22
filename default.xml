@@ -69,8 +69,9 @@
     <project name="Recrafter/cobbble"/>
     <project name="Recrafter/composter"/>
     <project name="Recrafter/crafter"/>
-    <project name="Recrafter/crafter-annotations"/>
     <project name="Recrafter/enderpearl"/>
+    <project name="Recrafter/loom"/>
+    <project name="Recrafter/nametag"/>
     <project name="Recrafter/recipe"/>
     <!-- endregion Recrafter -->
 </manifest>
