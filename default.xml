@@ -10,7 +10,6 @@
     <!-- region diskria-android -->
     <project name="diskria-android/.github"/>
     <project name="diskria-android/7TVEmotesToDiscord" revision="master"/>
-    <project name="diskria-android/gdtr-plus-plus"/>
     <project name="diskria-android/NoANRAndCrashDialogs"/>
     <project name="diskria-android/QSTermuxTiles" revision="master"/>
     <!-- endregion diskria-android -->
