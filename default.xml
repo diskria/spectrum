@@ -72,6 +72,7 @@
     <project name="Recrafter/enderpearl"/>
     <project name="Recrafter/loom"/>
     <project name="Recrafter/nametag"/>
+    <project name="Recrafter/polyglot"/>
     <project name="Recrafter/recipe"/>
     <!-- endregion Recrafter -->
 </manifest>
