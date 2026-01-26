@@ -35,7 +35,7 @@
     <project name="diskria-mc/.github"/>
     <project name="diskria-mc/AchieveHunter" revision="master"/>
     <project name="diskria-mc/advancements-fullscreen"/>
-    <project name="diskria-mc/AdvancementsSearch" revision="1.21.8+"/>
+    <project name="diskria-mc/advancements-search" revision="1.21.11+"/>
     <project name="diskria-mc/BACAP-Better-RU"/>
     <project name="diskria-mc/Carnevalle"/>
     <project name="diskria-mc/KeepLootTable" revision="1.20.3+"/>
@@ -71,6 +71,7 @@
     <project name="Recrafter/crafter"/>
     <project name="Recrafter/enderpearl"/>
     <project name="Recrafter/lapis"/>
+    <project name="Recrafter/lapis-api"/>
     <project name="Recrafter/loom"/>
     <project name="Recrafter/polyglot"/>
     <project name="Recrafter/recipe"/>
