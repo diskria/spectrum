@@ -71,6 +71,7 @@
     <project name="Recrafter/crafter"/>
     <project name="Recrafter/enderpearl"/>
     <project name="Recrafter/lapis"/>
+    <project name="Recrafter/lapis-annotations"/>
     <project name="Recrafter/lapis-api"/>
     <project name="Recrafter/loom"/>
     <project name="Recrafter/polyglot"/>
