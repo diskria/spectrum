@@ -53,11 +53,6 @@
     <project name="AchieveToDo/mod" revision="1.21.8+"/>
     <project name="AchieveToDo/modpack"/>
     <!-- endregion AchieveToDo -->
-    <!-- region Darlingram -->
-    <project name="Darlingram/.github"/>
-    <project name="Darlingram/android-app" revision="master"/>
-    <project name="Darlingram/www" revision="master"/>
-    <!-- endregion Darlingram -->
     <!-- region ForkyLab -->
     <project name="ForkyLab/.github"/>
     <project name="ForkyLab/gradle-plugin"/>
