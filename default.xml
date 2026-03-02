@@ -68,6 +68,7 @@
     <project name="Recrafter/lapis"/>
     <project name="Recrafter/lapis-annotations"/>
     <project name="Recrafter/lapis-api"/>
+    <project name="Recrafter/lapis-gradle-plugin"/>
     <project name="Recrafter/loom"/>
     <project name="Recrafter/polyglot"/>
     <project name="Recrafter/recipe"/>
