@@ -33,20 +33,18 @@
     <!-- endregion diskria-libs -->
     <!-- region diskria-mc -->
     <project name="diskria-mc/.github"/>
-    <project name="diskria-mc/AchieveHunter" revision="master"/>
+    <project name="diskria-mc/achievehunter" revision="master"/>
     <project name="diskria-mc/advancements-fullscreen"/>
     <project name="diskria-mc/advancements-search" revision="1.21.11+"/>
-    <project name="diskria-mc/BACAP-Better-RU"/>
-    <project name="diskria-mc/Carnevalle"/>
-    <project name="diskria-mc/KeepLootTable" revision="1.20.3+"/>
-    <project name="diskria-mc/MC-229142-Fix" revision="1.20.5+"/>
-    <project name="diskria-mc/MC-264204-Fix" revision="1.20+"/>
-    <project name="diskria-mc/MultiLineActionBar" revision="1.20+"/>
-    <project name="diskria-mc/ShutUpDeadEntities" revision="1.21.5+"/>
-    <project name="diskria-mc/Spritify"/>
-    <project name="diskria-mc/VisualPotions"/>
-    <project name="diskria-mc/XYZBook" revision="1.20.2+"/>
-    <project name="diskria-mc/YetAnotherGlint"/>
+    <project name="diskria-mc/bacap-better-ru"/>
+    <project name="diskria-mc/keep-loot-table" revision="1.20.3+"/>
+    <project name="diskria-mc/mc229142-fix" revision="1.20.5+"/>
+    <project name="diskria-mc/mc264204-fix" revision="1.20+"/>
+    <project name="diskria-mc/multi-line-action-bar" revision="1.20+"/>
+    <project name="diskria-mc/shut-up-dead-entities" revision="1.21.5+"/>
+    <project name="diskria-mc/visual-potions"/>
+    <project name="diskria-mc/xyz-book" revision="1.20.2+"/>
+    <project name="diskria-mc/yet-another-glint"/>
     <!-- endregion diskria-mc -->
     <!-- region AchieveToDo -->
     <project name="AchieveToDo/.github"/>
