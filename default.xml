@@ -48,7 +48,7 @@
     <!-- endregion diskria-mc -->
     <!-- region AchieveToDo -->
     <project name="AchieveToDo/.github"/>
-    <project name="AchieveToDo/mod" revision="1.21.8+"/>
+    <project name="AchieveToDo/mod" revision="1.21.4+"/>
     <project name="AchieveToDo/modpack"/>
     <!-- endregion AchieveToDo -->
     <!-- region ForkyLab -->
@@ -66,8 +66,6 @@
     <project name="Recrafter/lapis"/>
     <project name="Recrafter/lapis-annotations"/>
     <project name="Recrafter/lapis-gradle-plugin"/>
-    <project name="Recrafter/loom"/>
-    <project name="Recrafter/polyglot"/>
     <project name="Recrafter/recipe"/>
     <!-- endregion Recrafter -->
 </manifest>
