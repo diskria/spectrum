@@ -12,6 +12,7 @@
     <project name="diskria-android/7TVEmotesToDiscord" revision="master"/>
     <project name="diskria-android/NoANRAndCrashDialogs"/>
     <project name="diskria-android/QSTermuxTiles" revision="master"/>
+    <project name="diskria-android/TG4AForkEngine" revision="master"/>
     <!-- endregion diskria-android -->
     <!-- region diskria-legacy -->
     <project name="diskria-legacy/.github"/>
