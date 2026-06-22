@@ -10,7 +10,6 @@
     <!-- region diskria-android -->
     <project name="diskria-android/.github"/>
     <project name="diskria-android/7TVEmotesToDiscord" revision="master"/>
-    <project name="diskria-android/Darlingram"/>
     <project name="diskria-android/NoANRAndCrashDialogs"/>
     <project name="diskria-android/QSTermuxTiles" revision="master"/>
     <project name="diskria-android/TG4AForkEngine" revision="master"/>
@@ -37,7 +36,7 @@
     <project name="diskria-mc/.github"/>
     <project name="diskria-mc/achievehunter" revision="master"/>
     <project name="diskria-mc/advancements-fullscreen"/>
-    <project name="diskria-mc/advancements-search" revision="1.21.11+"/>
+    <project name="diskria-mc/advancements-search" revision="26.2+"/>
     <project name="diskria-mc/bacap-better-ru"/>
     <project name="diskria-mc/keep-loot-table" revision="1.20.3+"/>
     <project name="diskria-mc/mc229142-fix" revision="1.20.5+"/>
