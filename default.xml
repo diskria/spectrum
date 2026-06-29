@@ -31,6 +31,7 @@
     <project name="diskria-libs/kotlin-regex-dsl"/>
     <project name="diskria-libs/kotlin-shell-dsl"/>
     <project name="diskria-libs/kotlin-utils"/>
+    <project name="diskria-libs/poetesse"/>
     <!-- endregion diskria-libs -->
     <!-- region diskria-mc -->
     <project name="diskria-mc/.github"/>
