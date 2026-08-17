@@ -4,6 +4,7 @@
     <default remote="origin" revision="main" clone-depth="1"/>
     <!-- region diskria -->
     <project name="diskria/diskria"/>
+    <project name="diskria/clip-trimmer"/>
     <project name="diskria/projektor"/>
     <project name="diskria/spectrum"/>
     <!-- endregion diskria -->
@@ -41,11 +42,11 @@
     <project name="diskria-mc/bacap-better-ru"/>
     <project name="diskria-mc/keep-loot-table" revision="1.20.3+"/>
     <project name="diskria-mc/mc229142-fix" revision="1.20.5+"/>
-    <project name="diskria-mc/mc264204-fix" revision="1.20+"/>
-    <project name="diskria-mc/multi-line-action-bar" revision="1.20+"/>
-    <project name="diskria-mc/shut-up-dead-entities" revision="1.21.5+"/>
+    <project name="diskria-mc/mc264204-fix" revision="26.2+"/>
+    <project name="diskria-mc/multi-line-action-bar" revision="26.2+"/>
+    <project name="diskria-mc/shut-up-dead-entities" revision="26.2+"/>
     <project name="diskria-mc/visual-potions"/>
-    <project name="diskria-mc/xyz-book" revision="1.20.2+"/>
+    <project name="diskria-mc/xyz-book" revision="26.2+"/>
     <project name="diskria-mc/yet-another-glint"/>
     <!-- endregion diskria-mc -->
     <!-- region AchieveToDo -->
