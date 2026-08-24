@@ -4,7 +4,6 @@
     <default remote="origin" revision="main" clone-depth="1"/>
     <!-- region diskria -->
     <project name="diskria/diskria"/>
-    <project name="diskria/clip-trimmer"/>
     <project name="diskria/projektor"/>
     <project name="diskria/spectrum"/>
     <!-- endregion diskria -->
@@ -13,8 +12,10 @@
     <project name="diskria-android/7TVEmotesToDiscord" revision="master"/>
     <project name="diskria-android/NoANRAndCrashDialogs"/>
     <project name="diskria-android/QSTermuxTiles" revision="master"/>
-    <project name="diskria-android/TG4AForkEngine" revision="master"/>
     <!-- endregion diskria-android -->
+    <!-- region diskria-android-platform -->
+    <project name="diskria-android-platform/telegram-fork" revision="master"/>
+    <!-- endregion diskria-android-platform -->
     <!-- region diskria-legacy -->
     <project name="diskria-legacy/.github"/>
     <project name="diskria-legacy/AIDE-Colors"/>
@@ -34,41 +35,39 @@
     <project name="diskria-libs/kotlin-utils"/>
     <project name="diskria-libs/poetesse"/>
     <!-- endregion diskria-libs -->
-    <!-- region diskria-mc -->
-    <project name="diskria-mc/.github"/>
-    <project name="diskria-mc/achievehunter" revision="master"/>
-    <project name="diskria-mc/advancements-fullscreen"/>
-    <project name="diskria-mc/advancements-search" revision="26.2+"/>
-    <project name="diskria-mc/bacap-better-ru"/>
-    <project name="diskria-mc/keep-loot-table" revision="1.20.3+"/>
-    <project name="diskria-mc/mc229142-fix" revision="1.20.5+"/>
-    <project name="diskria-mc/mc264204-fix" revision="26.2+"/>
-    <project name="diskria-mc/multi-line-action-bar" revision="26.2+"/>
-    <project name="diskria-mc/shut-up-dead-entities" revision="26.2+"/>
-    <project name="diskria-mc/visual-potions"/>
-    <project name="diskria-mc/xyz-book" revision="26.2+"/>
-    <project name="diskria-mc/yet-another-glint"/>
-    <!-- endregion diskria-mc -->
-    <!-- region AchieveToDo -->
-    <project name="AchieveToDo/.github"/>
-    <project name="AchieveToDo/mod" revision="1.21.4+"/>
-    <project name="AchieveToDo/modpack"/>
-    <!-- endregion AchieveToDo -->
-    <!-- region ForkyLab -->
-    <project name="ForkyLab/.github"/>
-    <project name="ForkyLab/gradle-plugin"/>
-    <project name="ForkyLab/xml-schema"/>
-    <!-- endregion ForkyLab -->
-    <!-- region Recrafter -->
-    <project name="Recrafter/beacon"/>
-    <project name="Recrafter/bedrock"/>
-    <project name="Recrafter/cobbble"/>
-    <project name="Recrafter/composter"/>
-    <project name="Recrafter/crafter"/>
-    <project name="Recrafter/enderpearl"/>
-    <project name="Recrafter/lapis"/>
-    <project name="Recrafter/lapis-annotations"/>
-    <project name="Recrafter/lapis-gradle-plugin"/>
-    <project name="Recrafter/recipe"/>
-    <!-- endregion Recrafter -->
+    <!-- region diskria-minecraft -->
+    <project name="diskria-minecraft/.github"/>
+    <project name="diskria-minecraft/achievehunter" revision="master"/>
+    <project name="diskria-minecraft/achievetodo" revision="1.21.4+"/>
+    <project name="diskria-minecraft/advancements-fullscreen"/>
+    <project name="diskria-minecraft/advancements-search" revision="26.2+"/>
+    <project name="diskria-minecraft/atd"/>
+    <project name="diskria-minecraft/bacap-better-ru"/>
+    <project name="diskria-minecraft/keep-loot-table" revision="1.20.3+"/>
+    <project name="diskria-minecraft/mc229142-fix" revision="1.20.5+"/>
+    <project name="diskria-minecraft/mc264204-fix" revision="26.2+"/>
+    <project name="diskria-minecraft/multi-line-action-bar" revision="26.2+"/>
+    <project name="diskria-minecraft/shut-up-dead-entities" revision="26.2+"/>
+    <project name="diskria-minecraft/visual-potions"/>
+    <project name="diskria-minecraft/xyz-book" revision="26.2+"/>
+    <project name="diskria-minecraft/yet-another-glint"/>
+    <!-- endregion diskria-minecraft -->
+    <!-- region diskria-minecraft-platform -->
+    <project name="diskria-minecraft-platform/beacon"/>
+    <project name="diskria-minecraft-platform/bedrock"/>
+    <project name="diskria-minecraft-platform/cobbble"/>
+    <project name="diskria-minecraft-platform/composter"/>
+    <project name="diskria-minecraft-platform/crafter"/>
+    <project name="diskria-minecraft-platform/enderpearl"/>
+    <project name="diskria-minecraft-platform/lapis"/>
+    <project name="diskria-minecraft-platform/lapis-annotations"/>
+    <project name="diskria-minecraft-platform/lapis-gradle-plugin"/>
+    <project name="diskria-minecraft-platform/recipe"/>
+    <!-- endregion diskria-minecraft-platform -->
+    <!-- region diskria-tooling -->
+    <project name="diskria-tooling/.github"/>
+    <project name="diskria-tooling/clip-trimmer"/>
+    <project name="diskria-tooling/forky-gradle-plugin"/>
+    <project name="diskria-tooling/forky-xml-schema"/>
+    <!-- endregion diskria-tooling -->
 </manifest>
