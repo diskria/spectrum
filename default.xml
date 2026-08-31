@@ -16,23 +16,8 @@
     <!-- region diskria-android-platform -->
     <project name="diskria-android-platform/telegram-fork" revision="master"/>
     <!-- endregion diskria-android-platform -->
-    <!-- region diskria-legacy -->
-    <project name="diskria-legacy/.github"/>
-    <project name="diskria-legacy/AIDE-Colors"/>
-    <project name="diskria-legacy/Icon-Recolor-Tool"/>
-    <project name="diskria-legacy/MT3A-NCK-Hacker"/>
-    <project name="diskria-legacy/Skyscrapers"/>
-    <project name="diskria-legacy/VK-Films"/>
-    <project name="diskria-legacy/VK-MusicTransfer"/>
-    <project name="diskria-legacy/VK-PhotoParser"/>
-    <project name="diskria-legacy/VK-Protect"/>
-    <!-- endregion diskria-legacy -->
     <!-- region diskria-libs -->
     <project name="diskria-libs/.github"/>
-    <project name="diskria-libs/gradle-utils"/>
-    <project name="diskria-libs/kotlin-regex-dsl"/>
-    <project name="diskria-libs/kotlin-shell-dsl"/>
-    <project name="diskria-libs/kotlin-utils"/>
     <project name="diskria-libs/poetesse"/>
     <!-- endregion diskria-libs -->
     <!-- region diskria-minecraft -->
@@ -53,16 +38,8 @@
     <project name="diskria-minecraft/yet-another-glint"/>
     <!-- endregion diskria-minecraft -->
     <!-- region diskria-minecraft-platform -->
-    <project name="diskria-minecraft-platform/beacon"/>
-    <project name="diskria-minecraft-platform/bedrock"/>
-    <project name="diskria-minecraft-platform/cobbble"/>
-    <project name="diskria-minecraft-platform/composter"/>
     <project name="diskria-minecraft-platform/crafter"/>
-    <project name="diskria-minecraft-platform/enderpearl"/>
     <project name="diskria-minecraft-platform/lapis"/>
-    <project name="diskria-minecraft-platform/lapis-annotations"/>
-    <project name="diskria-minecraft-platform/lapis-gradle-plugin"/>
-    <project name="diskria-minecraft-platform/recipe"/>
     <!-- endregion diskria-minecraft-platform -->
     <!-- region diskria-tooling -->
     <project name="diskria-tooling/.github"/>
